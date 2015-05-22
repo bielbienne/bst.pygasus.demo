@@ -1,0 +1,151 @@
+.bielchainedfields .x-btn-icon-el {
+  height: 100%;
+  background-position: center center;
+}
+
+.x-bielchainedfields .x-panel-body {
+  border: none;
+}
+
+/* fix text cut off in IE and Firefox */
+.x-form-trigger-wrap .x-form-text {
+  height: 24px !important;
+}
+
+/* ie9 need the important flag */
+.bielchainedfields {
+  background-color: #FFFFFF;
+  background-image: none !important;
+}
+
+.logo-bielbienne {
+  background-image: url(../images/logo_bielbienne.png) !important;
+  background-color: transparent !important;
+  background-size: 24px 24px;
+}
+
+.disabled-logo-bielbienne {
+  opacity: 1;
+  padding: 0px;
+  cursor: default !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+.logo-phone {
+  background-image: url(../images/phone.png) !important;
+  background-size: 16px 16px;
+}
+
+.disabled-logo-phone {
+  opacity: 1;
+  padding: 0px;
+  cursor: default !important;
+}
+
+/*  ************** Notifications ************** */
+
+
+/* *** INFO *** */
+
+.ux-notification-icon-info {
+    background-image: url('../images/icon16_info.png');
+}
+
+.ux-notification-info .x-window-body {
+    text-align: center;
+    padding: 15px 5px 20px 5px;
+    background-color: transparent;
+    border: 0px solid white;
+}
+
+.ux-notification-info {
+    border-color: #157FCC !important
+}
+
+.ux-notification-info .x-window-header-default{
+    border-color: #157FCC !important
+}
+
+.ux-notification-info .x-window-header-default-top  {
+    background-color: #157FCC !important
+}
+
+/* *** SUCCESS *** */
+
+.ux-notification-icon-success {
+    background-image: url('../images/icon16_success.png');
+}
+
+.ux-notification-success .x-window-body {
+    text-align: center;
+    padding: 15px 5px 20px 5px;
+    background-color: transparent;
+    border: 0px solid white;
+}
+
+.ux-notification-success {
+    border-color: green !important
+}
+
+.ux-notification-success .x-window-header-default{
+    border-color: green !important
+}
+
+.ux-notification-success .x-window-header-default-top  {
+    background-color: green !important
+}
+
+
+/* *** ERROR *** */
+
+.ux-notification-icon-error {
+    background-image: url('../images/icon16_error.png');
+}
+
+.ux-notification-error .x-window-body {
+    text-align: center;
+    padding: 15px 5px 20px 5px;
+    background-color: transparent;
+    border: 0px solid white;
+}
+
+.ux-notification-error {
+    border-color: red !important
+}
+
+.ux-notification-error .x-window-header-default{
+    border-color: red !important
+}
+
+.ux-notification-error .x-window-header-default-top  {
+    background-color: red !important
+}
+
+
+/* *** WARNING *** */
+
+.ux-notification-icon-warning {
+    background-image: url('../images/icon16_warning.png');
+}
+
+.ux-notification-warning .x-window-body {
+    text-align: center;
+    padding: 15px 5px 20px 5px;
+    background-color: transparent;
+    border: 0px solid white;
+}
+
+.ux-notification-warning {
+    border-color: orange !important
+}
+
+.ux-notification-warning .x-window-header-default{
+    border-color: orange !important
+}
+
+.ux-notification-warning .x-window-header-default-top  {
+    background-color: orange !important
+}
+
+/*  ************ End Notifications ************ */

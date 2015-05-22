@@ -41,5 +41,6 @@ setup(name='bielbienne.demo',
           'Unidecode'
       ],
       entry_points={
-      },
-      )
+          'fanstatic.libraries': ['demo = bielbienne.demo.extjs:library'],
+      }
+)
