@@ -2,7 +2,7 @@ from bb.extjs.core import ext
 
 from bb.extjs.wsgi.interfaces import IRequest
 
-from bielbienne.demo import model
+from bb.extjs.demo import model
 
 from whoosh.index import create_in, open_dir, EmptyIndexError
 from whoosh.fields import TEXT, NUMERIC, STORED, KEYWORD, Schema

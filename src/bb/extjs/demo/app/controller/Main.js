@@ -1,4 +1,4 @@
-Ext.define('bielbienne.demo.controller.Main', {
+Ext.define('bb.extjs.demo.controller.Main', {
     extend: 'Ext.app.Controller',
     
     requires: [

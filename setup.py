@@ -13,7 +13,7 @@ long_description = (
     open('CHANGES.txt').read()
     + '\n')
 
-setup(name='bielbienne.demo',
+setup(name='bb.extjs.demo',
       version=version,
       description="Demo package",
       long_description=long_description,
@@ -29,7 +29,7 @@ setup(name='bielbienne.demo',
       license='gpl',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
-      namespace_packages=['bielbienne'],
+      namespace_packages=['bb', 'bb.extjs'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
@@ -41,6 +41,6 @@ setup(name='bielbienne.demo',
           'Unidecode'
       ],
       entry_points={
-          'fanstatic.libraries': ['demo = bielbienne.demo.extjs:library'],
+          'fanstatic.libraries': ['demo = bb.extjs.demo.extjs:library'],
       }
 )

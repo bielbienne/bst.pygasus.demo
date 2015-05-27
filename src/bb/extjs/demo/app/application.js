@@ -1,4 +1,4 @@
-Ext.define('bielbienne.demo.Application', {
+Ext.define('bb.extjs.demo.Application', {
     extend: 'Ext.app.Application',
     requires: [
     	'scaffolding.bufferedstore.Card'
@@ -7,14 +7,14 @@ Ext.define('bielbienne.demo.Application', {
     name: 'DEMO',
 
     views: [
-        'bielbienne.demo.view.MainView'
+        'bb.extjs.demo.view.MainView'
     ],
     
     controllers: [
-    	'bielbienne.demo.controller.Main'
+    	'bb.extjs.demo.controller.Main'
     ],
     
     launch: function() {
-        Ext.create('bielbienne.demo.view.MainView');
+        Ext.create('bb.extjs.demo.view.MainView');
     }
 });

@@ -1,4 +1,4 @@
-Ext.define('bielbienne.demo.view.MainView', {
+Ext.define('bb.extjs.demo.view.MainView', {
     extend: 'Ext.container.Viewport',
     
     requires: [

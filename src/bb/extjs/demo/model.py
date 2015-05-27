@@ -1,5 +1,5 @@
 from bb.extjs.core import ext
-from bielbienne.demo import schema
+from bb.extjs.demo import schema
 
 class Card(ext.Model):
     ext.schema(schema.ICard)

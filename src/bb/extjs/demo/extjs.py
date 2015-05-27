@@ -14,16 +14,16 @@ favicon = Resource(library, 'resources/images/phone.ico')
 class DemoContext(ext.ApplicationContext):
 
     title = 'Demo'
-    application = 'bielbienne.demo.Application'
-    namespace = 'bielbienne.demo'
+    application = 'bb.extjs.demo.Application'
+    namespace = 'bb.extjs.demo'
     resources = Resource(library, 'application.js',
                          depends=[ext.extjs_resources_skinless, themes['neptune'], styles, clearButtonStyle, favicon])
 
 class ViewClassPathMapping(ext.ClassPathMapping):
-    namespace='bielbienne.demo.view'
+    namespace='bb.extjs.demo.view'
     path='fanstatic/demo/view'
 
 
 class ControllerClassPathMapping(ext.ClassPathMapping):
-    namespace='bielbienne.demo.controller'
+    namespace='bb.extjs.demo.controller'
     path='fanstatic/demo/controller'
