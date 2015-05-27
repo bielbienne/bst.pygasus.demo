@@ -5,30 +5,35 @@ from bb.extjs.wsgi.interfaces import IRequest
 from bielbienne.demo import model
 
 from whoosh.index import create_in, open_dir, EmptyIndexError
-from whoosh.fields import TEXT, NUMERIC, STORED, Schema
+from whoosh.fields import TEXT, NUMERIC, STORED, KEYWORD, Schema
 from whoosh.qparser import QueryParser
 
-import copy
+from threading import Lock
+
 import json
 import os
 
 data = dict()
 cards = list()
 ix = None
+mutex_get = Lock()
+mutex_update = Lock()
 
 
 class CardHandler(ext.AbstractModelHandler):
     ext.adapts(model.Card, IRequest)
     
     def get(self, model, batch):
-        global ix
+        global ix, mutex
+        
+        mutex_get.acquire()        
         
         try:
             ix = open_dir("index")
         except EmptyIndexError:
-            schema = Schema(id=NUMERIC(unique=True), name=TEXT, type=TEXT,
-                            layout=TEXT, text=TEXT, colors=TEXT,
-                            costs=NUMERIC, power=TEXT, toughness=TEXT,
+            schema = Schema(id=NUMERIC(unique=True, sortable=True), name=KEYWORD(sortable=True), type=TEXT(sortable=True),
+                            layout=TEXT(sortable=True), text=TEXT, colors=KEYWORD(sortable=True),
+                            costs=NUMERIC(sortable=True), power=TEXT(sortable=True), toughness=TEXT(sortable=True),
                             card=STORED)
 
             if not os.path.exists("index"):
@@ -66,7 +71,7 @@ class CardHandler(ext.AbstractModelHandler):
                                     costs=model.costs,
                                     power=model.power,
                                     toughness=model.toughness,
-                                    card=copy.deepcopy(model))
+                                    card=model)
                 
             writer.commit()
             data.clear()
@@ -77,6 +82,8 @@ class CardHandler(ext.AbstractModelHandler):
         
         property, direction = self.sort()
         
+        total_results = 0
+        
         with ix.searcher() as searcher:
             cards.clear()
             query = QueryParser('', ix.schema).parse('*')
@@ -85,17 +92,25 @@ class CardHandler(ext.AbstractModelHandler):
                 direction=False
             else:
                 direction=True
-            results = searcher.search_page(query, page, pagelen=limit, sortedby=property, reverse=direction)
+                
+            results = searcher.search_page(query, page, limit, sortedby=property, reverse=direction)
+
+            total_results = results.total
+
             for result in results:
                 cards.append(result['card'])
-        
-        return cards, len(cards)
+                    
+        mutex_get.release()  
+                
+        return cards, total_results
 
     def create(self, model, batch):
         return [model]
     
     def update(self, model, batch):
-        global ix
+        global ix, mutex_update
+        
+        mutex_update.acquire()
         with ix.searcher() as searcher:
             query = QueryParser('id', ix.schema).parse(str(model.id))
             result = searcher.search(query)
@@ -115,6 +130,8 @@ class CardHandler(ext.AbstractModelHandler):
                 
                 writer.commit()
                 
+        mutex_update.release()
+                
         return [model], 1
     
     def read_json(self, path):
@@ -122,3 +139,4 @@ class CardHandler(ext.AbstractModelHandler):
         if len(data) == 0:
             with open(path) as data_file:
                 data = json.load(data_file)
+                    

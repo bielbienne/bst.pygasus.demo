@@ -7,7 +7,6 @@ Ext.define('bielbienne.demo.controller.Main', {
     
     init: function(){
 		// empty at the moment
-		this.getStore('scaffolding.bufferedstore.Card');
     },
 
 });
