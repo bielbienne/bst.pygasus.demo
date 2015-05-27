@@ -1,5 +1,5 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-    <include package="bielbienne.demo" />
+    <include package="bb.extjs.demo" />
 
 </configure>
