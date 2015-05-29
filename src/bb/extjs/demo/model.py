@@ -1,9 +1,10 @@
 from bb.extjs.core import ext
 from bb.extjs.demo import schema
 
+
 class Card(ext.Model):
     ext.schema(schema.ICard)
-    id = 0 
+    id = 0
     type = ''
     text = ''
     costs = 0
@@ -12,4 +13,3 @@ class Card(ext.Model):
     name = ''
     power = ''
     toughness = ''
-    
