@@ -1,6 +1,6 @@
 Ext.define('bb.extjs.demo.view.MainView', {
     extend: 'Ext.container.Viewport',
-    
+
     requires: [
         'scaffolding.grid.Card',
         'scaffolding.editgrid.Card',
@@ -18,7 +18,7 @@ Ext.define('bb.extjs.demo.view.MainView', {
         Ext.applyIf(me, {
             xtype: 'panel',
             items: [{
-                   xtype: 'tabpanel',
+                xtype: 'tabpanel',
                 items: [{
                     xtype: 'GridCard',
                     title: 'Grid',
@@ -30,6 +30,7 @@ Ext.define('bb.extjs.demo.view.MainView', {
                 {
                     xtype: 'FormCard',
                     title: 'Form',
+                    margin: '5 5 5 5',
                     dockedItems: [{
                         xtype: 'toolbar',
                         docked: 'top',
@@ -38,22 +39,15 @@ Ext.define('bb.extjs.demo.view.MainView', {
                             action: 'save',
                             text: 'Save',
                         },{
-                            text: 'Cancel'
+                            text: 'Cancel',
+                            action: 'cancel'
                         }]
                     }]
-                },
-                {
-                    xtype: 'DisplayCard',
-                    title: 'Display'
                 }]
             }]
         });
 
         me.callParent(arguments);
-    },
-    
-    saveCardToStore: function(){
-    
-    } 
+    }
 
 });

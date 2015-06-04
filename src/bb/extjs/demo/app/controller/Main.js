@@ -11,6 +11,9 @@ Ext.define('bb.extjs.demo.controller.Main', {
     }, {
         ref: 'idform',
         selector: 'FormCard field[name=id]'
+    }, {
+        ref: 'grid',
+        selector: 'GridCard'
     }],
 
     init: function(){
@@ -18,8 +21,22 @@ Ext.define('bb.extjs.demo.controller.Main', {
             'FormCard button[action=save]': {
                 click: this.onFormSave
             },
+            'FormCard button[action=cancel]': {
+                click: function() { this.getForm().getForm().reset(); }
+            },
             '#mainView': {
                 afterrender: this.onContentRendered
+            },
+            'GridCard': {
+                cellclick: function(ele, td, cellIndex, record) {
+                    this.application.controllers.get('bb.extjs.demo.controller.Card').addContent(record);
+                }
+            },
+            'EditGridCard': {
+                validateedit: function(editor, context) {
+                    var store = this.getStore('scaffolding.store.Card');
+                    store.loadRecords([context.record]);
+                }
             }
         });
         
@@ -31,7 +48,7 @@ Ext.define('bb.extjs.demo.controller.Main', {
     },
 
 
-    
+
     onFormSave: function(button, event){
         var form = this.getForm();
         var store = this.getStore('scaffolding.store.Card');
@@ -39,7 +56,19 @@ Ext.define('bb.extjs.demo.controller.Main', {
         form.updateRecord(record);
         record.set('id', 0);
         store.add(record);
+        alert('Record stored successfully');
+        form.getForm().reset();
+    },
+
+    deleteRecord: function(record){
+        var grid = this.getGrid();
+        var store = this.getStore('scaffolding.store.Card');
+        store.loadRecords([record]);
+        store.remove(record);
+        var sel = grid.getSelectionModel();
+        sel.deselect(sel.getSelection());
+        //store = this.getStore('scaffolding.bufferedstore.Card');
+        store.load();
+        grid.reconfigure(store);
     }
-
-
 });

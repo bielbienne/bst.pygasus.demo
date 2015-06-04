@@ -22,8 +22,6 @@ from whoosh.fields import SchemaClass
 
 from whoosh.qparser import QueryParser
 
-from threading import Lock
-
 import json
 import os
 
@@ -49,6 +47,11 @@ class CardHandler(ext.AbstractModelHandler):
         CardIndexer.update_index(model)
 
         return [model], 1
+
+    def delete(self, model, batch):
+        CardIndexer.reduce_index(model)
+
+        return [model], 1    
 
 
 @ext.subscribe(IApplicationSettings, IApplicationStartupEvent)
@@ -96,7 +99,7 @@ class CardIndexer():
                 model.layout = data[key]['layout']
                 model.name = data[key]['name']
                 if 'text' in data[key].keys():
-                    model.text = data[key]['text']
+                    model.text = data[key]['text'].replace('\n', '')
                 if 'cmc' in data[key].keys():
                     model.costs = int(data[key]['cmc'])
                 if 'power' in data[key].keys():
@@ -170,7 +173,7 @@ class CardIndexer():
         with ix.searcher() as searcher:
             query = QueryParser('id', ix.schema).parse(str(model.id))
             result = searcher.search(query)
-            if len(result) == 1:
+            if len(result):
                 writer = ix.writer()
 
                 writer.update_document(id=model.id,
@@ -186,9 +189,29 @@ class CardIndexer():
 
                 writer.commit()
 
+    def reduce_index(model):
+        global ix
+        writer = ix.writer()
+
+        query = QueryParser('id', ix.schema).parse(str(model.id))
+        writer.delete_by_query(query)
+        writer.commit()                
+
     def get_next_id():
-        reader = ix.reader()
-        return reader.doc_count() + 1
+        global ix
+
+        id = 1
+        with ix.searcher() as searcher:
+            query = QueryParser('', ix.schema).parse('*')
+            results = searcher.search_page(query,
+                                           pagenum=1,
+                                           pagelen=1,
+                                           sortedby='id',
+                                           reverse=True)
+            
+            if len(results):
+                id = results[0]['card'].id + 1 
+        return id
 
     def read_json(path):
         with open(path) as data_file:
