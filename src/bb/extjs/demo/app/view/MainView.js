@@ -1,3 +1,5 @@
+var _ = i18n('bb.extjs.demo');
+
 Ext.define('bb.extjs.demo.view.MainView', {
     extend: 'Ext.container.Viewport',
 
@@ -37,7 +39,7 @@ Ext.define('bb.extjs.demo.view.MainView', {
                         items: [{
                             xtype: 'button',
                             action: 'save',
-                            text: 'Save',
+                            text: _('tr_save', 'Save'),
                         },{
                             text: 'Cancel',
                             action: 'cancel'

@@ -51,13 +51,16 @@ Ext.define('bb.extjs.demo.controller.Main', {
 
     onFormSave: function(button, event){
         var form = this.getForm();
-        var store = this.getStore('scaffolding.store.Card');
-        var record = Ext.create('scaffolding.model.Card');
-        form.updateRecord(record);
-        record.set('id', 0);
-        store.add(record);
-        alert('Record stored successfully');
-        form.getForm().reset();
+        if(form.isValid()){
+            var store = this.getStore('scaffolding.store.Card');
+            var record = Ext.create('scaffolding.model.Card');
+            form.updateRecord(record);
+            record.set('id', 0);
+            record.phantom = true;
+            store.add(record);
+            alert('Record stored successfully');
+            form.getForm().reset();
+        }
     },
 
     deleteRecord: function(record){

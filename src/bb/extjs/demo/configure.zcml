@@ -6,5 +6,7 @@
     <include package="bb.extjs.core" />
 
     <grok:grok package="." />
-  
+
+    <i18n:registerTranslations directory="locales" />
+
 </configure>
