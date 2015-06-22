@@ -13,3 +13,4 @@ class Card(ext.Model):
     name = ''
     power = ''
     toughness = ''
+    availability = 0

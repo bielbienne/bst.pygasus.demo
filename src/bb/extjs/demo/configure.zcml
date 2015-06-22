@@ -5,6 +5,8 @@
 
     <include package="bb.extjs.core" />
 
+    <include file="vocabularies.zcml" />
+
     <grok:grok package="." />
 
     <i18n:registerTranslations directory="locales" />

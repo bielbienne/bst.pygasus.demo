@@ -69,6 +69,7 @@ class CardIndexSchema(SchemaClass):
     costs = NUMERIC(sortable=True)
     power = TEXT(sortable=True)
     toughness = TEXT(sortable=True)
+    availability = NUMERIC(sortable=True)
     card = STORED
 
 
@@ -118,6 +119,7 @@ class CardIndexer():
                                     costs=model.costs,
                                     power=model.power,
                                     toughness=model.toughness,
+                                    availability=model.availability,
                                     card=model)
 
             writer.commit()
@@ -163,6 +165,7 @@ class CardIndexer():
                             costs=model.costs,
                             power=model.power,
                             toughness=model.toughness,
+                            availability=model.availability,
                             card=model)
 
         writer.commit()
@@ -185,6 +188,7 @@ class CardIndexer():
                                        costs=model.costs,
                                        power=model.power,
                                        toughness=model.toughness,
+                                       availability=model.availability,
                                        card=model)
 
                 writer.commit()

@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    i18n_domain="bb.extjs.demo">
+
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        name="bb.extjs.demo.card_availability"
+        component="bb.extjs.demo.vocabularies.card_availability"
+    />
+    
+</configure>

@@ -43,3 +43,7 @@ class ICard(Interface):
     toughness = schema.TextLine(title='Toughness',
                                 required=False
                                 )
+
+    availability = schema.Choice(title='Availability',
+                                 vocabulary='bb.extjs.demo.card_availability',
+                                 required=True)
