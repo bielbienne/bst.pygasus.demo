@@ -1,3 +1,7 @@
+import json
+import os
+from random import randint
+
 from bb.extjs.core import ext
 
 from bb.extjs.wsgi.interfaces import IRequest
@@ -22,8 +26,6 @@ from whoosh.fields import SchemaClass
 
 from whoosh.qparser import QueryParser
 
-import json
-import os
 
 ix = None
 
@@ -51,7 +53,7 @@ class CardHandler(ext.AbstractModelHandler):
     def delete(self, model, batch):
         CardIndexer.reduce_index(model)
 
-        return [model], 1    
+        return [model], 1
 
 
 @ext.subscribe(IApplicationSettings, IApplicationStartupEvent)
@@ -99,6 +101,7 @@ class CardIndexer():
                 model.type = data[key]['type']
                 model.layout = data[key]['layout']
                 model.name = data[key]['name']
+                model.availability = randint(0, 5)
                 if 'text' in data[key].keys():
                     model.text = data[key]['text'].replace('\n', '')
                 if 'cmc' in data[key].keys():
@@ -199,7 +202,7 @@ class CardIndexer():
 
         query = QueryParser('id', ix.schema).parse(str(model.id))
         writer.delete_by_query(query)
-        writer.commit()                
+        writer.commit()
 
     def get_next_id():
         global ix
@@ -212,9 +215,9 @@ class CardIndexer():
                                            pagelen=1,
                                            sortedby='id',
                                            reverse=True)
-            
+
             if len(results):
-                id = results[0]['card'].id + 1 
+                id = results[0]['card'].id + 1
         return id
 
     def read_json(path):
