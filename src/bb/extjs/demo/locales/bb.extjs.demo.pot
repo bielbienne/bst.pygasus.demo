@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 3.10\n"
 
-#: ./src/bb.extjs.demo/src/bb/extjs/demo/schema.py:27
+#: ./src/bst.pygasus.demo/src/bst.pygasus/demo/schema.py:27
 msgid "tr_colors"
 msgstr ""
 
 #. Default: Save
-#: ./src/bb.extjs.demo/src/bb/extjs/demo/app/view/MainView.js:43
+#: ./src/bst.pygasus.demo/src/bst.pygasus/demo/app/view/MainView.js:43
 msgid "tr_save"
 msgstr ""

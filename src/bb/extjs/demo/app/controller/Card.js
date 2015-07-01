@@ -1,4 +1,4 @@
-Ext.define('bb.extjs.demo.controller.Card', {
+Ext.define('bst.pygasus.demo.controller.Card', {
     extend: 'Ext.app.Controller',
 
     requires: [
@@ -23,7 +23,7 @@ Ext.define('bb.extjs.demo.controller.Card', {
     },
 
     addContent: function(record){
-        var view = Ext.create('bb.extjs.demo.view.CardView');
+        var view = Ext.create('bst.pygasus.demo.view.CardView');
         var display = this.getDisplay();
         display.loadRecord(record);
         view.setTitle(record.getData()['name']);
@@ -31,7 +31,7 @@ Ext.define('bb.extjs.demo.controller.Card', {
     },
 
     onCloseClick: function(){
-        var grid = this.application.controllers.get('bb.extjs.demo.controller.Main').getGrid();
+        var grid = this.application.controllers.get('bst.pygasus.demo.controller.Main').getGrid();
         var sel = grid.getSelectionModel();
         sel.deselect(sel.getSelection());
     },
@@ -39,7 +39,7 @@ Ext.define('bb.extjs.demo.controller.Card', {
     onDeleteClick: function(e, eOpts){
         var display = this.getDisplay();
         var record = display.getRecord();    
-        this.application.controllers.get('bb.extjs.demo.controller.Main').deleteRecord(record);
+        this.application.controllers.get('bst.pygasus.demo.controller.Main').deleteRecord(record);
         e.up('window').close();
     }
 

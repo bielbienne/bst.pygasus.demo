@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language-Code: fr\n"
 "Language-Name: French\n"
-"Domain: bb.extjs.demo\n"
+"Domain: bst.pygasus.demo\n"
 
-#: src/bb.extjs.demo/src/bb/extjs/demo/schema.py:27
+#: src/bst.pygasus.demo/src/bst.pygasus/demo/schema.py:27
 msgid "tr_colors"
 msgstr "Couleurs"
 
 #. Default: Save
-#: src/bb.extjs.demo/src/bb/extjs/demo/app/view/MainView.js:43
+#: src/bst.pygasus.demo/src/bst.pygasus/demo/app/view/MainView.js:43
 msgid "tr_save"
 msgstr "Sauvegarder"

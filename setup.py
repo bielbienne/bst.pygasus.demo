@@ -13,7 +13,7 @@ long_description = (
     open('CHANGES.txt').read()
     + '\n')
 
-setup(name='bb.extjs.demo',
+setup(name='bst.pygasus.demo',
       version=version,
       description="Demo package",
       long_description=long_description,
@@ -29,18 +29,18 @@ setup(name='bb.extjs.demo',
       license='gpl',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
-      namespace_packages=['bb', 'bb.extjs'],
+      namespace_packages=['bb', 'bst.pygasus'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
           'setuptools',
           'pyaxl',
-          'bb.extjs.core',
+          'bst.pygasus.core',
           'pyaml',
           'Whoosh',
           'Unidecode'
       ],
       entry_points={
-          'fanstatic.libraries': ['demo = bb.extjs.demo.extjs:library'],
+          'fanstatic.libraries': ['demo = bst.pygasus.demo.extjs:library'],
       }
 )

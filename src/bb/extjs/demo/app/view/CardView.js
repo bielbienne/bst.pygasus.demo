@@ -1,4 +1,4 @@
-Ext.define('bb.extjs.demo.view.CardView', {
+Ext.define('bst.pygasus.demo.view.CardView', {
     extend: 'Ext.window.Window',
 
     requires: [

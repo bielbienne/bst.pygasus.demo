@@ -2,16 +2,16 @@ import json
 import os
 from random import randint
 
-from bb.extjs.core import ext
+from bst.pygasus.core import ext
 
-from bb.extjs.wsgi.interfaces import IRequest
-from bb.extjs.wsgi.interfaces import IApplicationSettings
+from bst.pygasus.wsgi.interfaces import IRequest
+from bst.pygasus.wsgi.interfaces import IApplicationSettings
 
-from bb.extjs.wsgi.events import IApplicationStartupEvent
+from bst.pygasus.wsgi.events import IApplicationStartupEvent
 
-from bb.extjs.demo import model
+from bst.pygasus.demo import model
 
-from bb.extjs.demo.model import Card
+from bst.pygasus.demo.model import Card
 
 from whoosh.index import create_in
 from whoosh.index import open_dir

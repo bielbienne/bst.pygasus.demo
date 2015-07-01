@@ -1,4 +1,4 @@
-Ext.define('bb.extjs.demo.Application', {
+Ext.define('bst.pygasus.demo.Application', {
     extend: 'Ext.app.Application',
     requires: [
         'Ext.data.Request',
@@ -8,16 +8,16 @@ Ext.define('bb.extjs.demo.Application', {
     name: 'DEMO',
 
     views: [
-        'bb.extjs.demo.view.MainView',
-        'bb.extjs.demo.view.CardView'
+        'bst.pygasus.demo.view.MainView',
+        'bst.pygasus.demo.view.CardView'
     ],
     
     controllers: [
-    	'bb.extjs.demo.controller.Main',
-        'bb.extjs.demo.controller.Card'
+    	'bst.pygasus.demo.controller.Main',
+        'bst.pygasus.demo.controller.Card'
     ],
     
     launch: function() {
-        Ext.create('bb.extjs.demo.view.MainView');
+        Ext.create('bst.pygasus.demo.view.MainView');
     }
 });

@@ -1,4 +1,4 @@
-Ext.define('bb.extjs.demo.controller.Main', {
+Ext.define('bst.pygasus.demo.controller.Main', {
     extend: 'Ext.app.Controller',
     
     requires: [
@@ -29,7 +29,7 @@ Ext.define('bb.extjs.demo.controller.Main', {
             },
             'GridCard': {
                 cellclick: function(ele, td, cellIndex, record) {
-                    this.application.controllers.get('bb.extjs.demo.controller.Card').addContent(record);
+                    this.application.controllers.get('bst.pygasus.demo.controller.Card').addContent(record);
                 }
             },
             'EditGridCard': {

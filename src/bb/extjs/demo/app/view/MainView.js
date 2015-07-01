@@ -1,6 +1,6 @@
-var _ = i18n('bb.extjs.demo');
+var _ = i18n('bst.pygasus.demo');
 
-Ext.define('bb.extjs.demo.view.MainView', {
+Ext.define('bst.pygasus.demo.view.MainView', {
     extend: 'Ext.container.Viewport',
 
     requires: [

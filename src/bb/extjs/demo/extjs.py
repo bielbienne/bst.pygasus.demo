@@ -1,4 +1,4 @@
-from bb.extjs.core import ext
+from bst.pygasus.core import ext
 
 from js.extjs.theme import themes
 
@@ -15,8 +15,8 @@ favicon = Resource(library, 'resources/images/phone.ico')
 class DemoContext(ext.ApplicationContext):
 
     title = 'Demo'
-    application = 'bb.extjs.demo.Application'
-    namespace = 'bb.extjs.demo'
+    application = 'bst.pygasus.demo.Application'
+    namespace = 'bst.pygasus.demo'
     resources = Resource(library, 'application.js',
                          depends=[ext.extjs_resources_skinless,
                                   themes['neptune'],
@@ -26,10 +26,10 @@ class DemoContext(ext.ApplicationContext):
 
 
 class ViewClassPathMapping(ext.ClassPathMapping):
-    namespace = 'bb.extjs.demo.view'
+    namespace = 'bst.pygasus.demo.view'
     path = 'fanstatic/demo/view'
 
 
 class ControllerClassPathMapping(ext.ClassPathMapping):
-    namespace = 'bb.extjs.demo.controller'
+    namespace = 'bst.pygasus.demo.controller'
     path = 'fanstatic/demo/controller'

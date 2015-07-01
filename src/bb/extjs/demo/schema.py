@@ -1,6 +1,6 @@
-from bb.extjs.core import ext
+from bst.pygasus.core import ext
 
-from bb.extjs.demo import _ 
+from bst.pygasus.demo import _ 
 
 from zope import schema
 from zope.interface import Interface
@@ -45,5 +45,5 @@ class ICard(Interface):
                                 )
 
     availability = schema.Choice(title='Availability',
-                                 vocabulary='bb.extjs.demo.card_availability',
+                                 vocabulary='bst.pygasus.demo.card_availability',
                                  required=True)

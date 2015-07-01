@@ -1,5 +1,5 @@
-from bb.extjs.core import ext
-from bb.extjs.demo import schema
+from bst.pygasus.core import ext
+from bst.pygasus.demo import schema
 
 
 class Card(ext.Model):
