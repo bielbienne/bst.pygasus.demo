@@ -7,7 +7,7 @@
 path = ${zcml:output}
 
 [app:main]
-use = egg:bb.extjs.wsgi#main
+use = egg:bst.pygasus.wsgi#main
 
 [server:debug]
 use = egg:waitress#http
