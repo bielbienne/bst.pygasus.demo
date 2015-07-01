@@ -34,7 +34,6 @@ setup(name='bst.pygasus.demo',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'pyaxl',
           'bst.pygasus.core',
           'pyaml',
           'Whoosh',

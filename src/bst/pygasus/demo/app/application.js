@@ -2,7 +2,7 @@ Ext.define('bst.pygasus.demo.Application', {
     extend: 'Ext.app.Application',
     requires: [
         'Ext.data.Request',
-    	'scaffolding.bufferedstore.Card'
+        'scaffolding.bufferedstore.Card'
     ],
 
     name: 'DEMO',
@@ -13,10 +13,10 @@ Ext.define('bst.pygasus.demo.Application', {
     ],
     
     controllers: [
-    	'bst.pygasus.demo.controller.Main',
+        'bst.pygasus.demo.controller.Main',
         'bst.pygasus.demo.controller.Card'
     ],
-    
+
     launch: function() {
         Ext.create('bst.pygasus.demo.view.MainView');
     }
