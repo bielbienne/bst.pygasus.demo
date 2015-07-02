@@ -1,16 +1,15 @@
-import json
 import os
+import sys
+import json
 from random import randint
 
 from bst.pygasus.core import ext
 
 from bst.pygasus.wsgi.interfaces import IRequest
+from bst.pygasus.wsgi.events import IApplicationStartupEvent
 from bst.pygasus.wsgi.interfaces import IApplicationSettings
 
-from bst.pygasus.wsgi.events import IApplicationStartupEvent
-
 from bst.pygasus.demo import model
-
 from bst.pygasus.demo.model import Card
 
 from whoosh.index import create_in
@@ -27,7 +26,7 @@ from whoosh.fields import SchemaClass
 from whoosh.qparser import QueryParser
 
 
-ix = None
+cardIndexer = None
 
 
 class CardHandler(ext.AbstractModelHandler):
@@ -37,62 +36,66 @@ class CardHandler(ext.AbstractModelHandler):
         start, limit = self.slice()
         property, direction = self.sort()
 
-        return CardIndexer.search_index(start, limit, property, direction)
+        return cardIndexer.search_index(start, limit, property, direction)
 
     def create(self, model, batch):
-        model.id = CardIndexer.get_next_id()
-        CardIndexer.extend_index(model)
+        model.id = cardIndexer.get_next_id()
+        cardIndexer.extend_index(model)
 
         return [model], 1
 
     def update(self, model, batch):
-        CardIndexer.update_index(model)
+        cardIndexer.update_index(model)
 
         return [model], 1
 
     def delete(self, model, batch):
-        CardIndexer.reduce_index(model)
+        cardIndexer.reduce_index(model)
 
         return [model], 1
 
 
 @ext.subscribe(IApplicationSettings, IApplicationStartupEvent)
 def initalize_card_index(settings, event):
-    CardIndexer.create_index()
+    global cardIndexer
+    cardIndexer = CardIndexer()
+    cardIndexer.create_index()
 
 
 class CardIndexSchema(SchemaClass):
-    id = NUMERIC(unique=True, sortable=True)
-    name = KEYWORD(sortable=True)
-    type = KEYWORD(sortable=True)
-    layout = TEXT(sortable=True)
+    id = NUMERIC(unique=True)
+    name = KEYWORD()
+    type = KEYWORD()
+    layout = TEXT()
     text = TEXT
-    colors = KEYWORD(sortable=True, commas=True)
-    costs = NUMERIC(sortable=True)
-    power = TEXT(sortable=True)
-    toughness = TEXT(sortable=True)
-    availability = NUMERIC(sortable=True)
+    colors = KEYWORD(commas=True)
+    costs = NUMERIC()
+    power = TEXT()
+    toughness = TEXT()
+    availability = NUMERIC()
     card = STORED
 
 
-class CardIndexer():
+class CardIndexer(object):
 
-    def create_index():
-        global ix
+    ix = None
+
+    def create_index(self):
         data = list()
-
+        storage_path = self.get_storage_path()
+        if not os.path.exists(storage_path):
+            os.mkdir(storage_path)
         try:
-            ix = open_dir("index")
+            self.ix = open_dir(storage_path)
+            self.ix.schema.clean()
         except EmptyIndexError:
-            if not os.path.exists("index"):
-                os.mkdir("index")
 
-            ix = create_in("index", CardIndexSchema())
-            writer = ix.writer()
+            self.ix = create_in(storage_path, CardIndexSchema())
+            writer = self.ix.writer()
 
             file_path = os.path.join(os.path.dirname(__file__),
                                      'app/resources/AllCards.json')
-            data = CardIndexer.read_json(file_path)
+            data = self.read_json(file_path)
             id = 1
             for key in data.keys():
                 model = Card()
@@ -128,15 +131,14 @@ class CardIndexer():
             writer.commit()
             data.clear()
 
-    def search_index(start, limit, property, direction):
-        global ix
+    def search_index(self, start, limit, property, direction):
         cards = list()
 
         total_results = 0
 
-        with ix.searcher() as searcher:
+        with self.ix.searcher() as searcher:
             cards.clear()
-            query = QueryParser('', ix.schema).parse('*')
+            query = QueryParser('', self.ix.schema).parse('*')
             page = int(start / limit) + 1
             if direction == 'ASC':
                 direction = False
@@ -156,8 +158,8 @@ class CardIndexer():
 
         return cards, total_results
 
-    def extend_index(model):
-        writer = ix.writer()
+    def extend_index(self, model):
+        writer = self.ix.writer()
 
         writer.add_document(id=model.id,
                             name=model.name,
@@ -173,14 +175,12 @@ class CardIndexer():
 
         writer.commit()
 
-    def update_index(model):
-        global ix
-
-        with ix.searcher() as searcher:
-            query = QueryParser('id', ix.schema).parse(str(model.id))
+    def update_index(self, model):
+        with self.ix.searcher() as searcher:
+            query = QueryParser('id', self.ix.schema).parse(str(model.id))
             result = searcher.search(query)
             if len(result):
-                writer = ix.writer()
+                writer = self.ix.writer()
 
                 writer.update_document(id=model.id,
                                        name=model.name,
@@ -196,20 +196,17 @@ class CardIndexer():
 
                 writer.commit()
 
-    def reduce_index(model):
-        global ix
-        writer = ix.writer()
+    def reduce_index(self, model):
+        writer = self.ix.writer()
 
-        query = QueryParser('id', ix.schema).parse(str(model.id))
+        query = QueryParser('id', self.ix.schema).parse(str(model.id))
         writer.delete_by_query(query)
         writer.commit()
 
-    def get_next_id():
-        global ix
-
+    def get_next_id(self):
         id = 1
-        with ix.searcher() as searcher:
-            query = QueryParser('', ix.schema).parse('*')
+        with self.ix.searcher() as searcher:
+            query = QueryParser('', self.ix.schema).parse('*')
             results = searcher.search_page(query,
                                            pagenum=1,
                                            pagelen=1,
@@ -220,6 +217,12 @@ class CardIndexer():
                 id = results[0]['card'].id + 1
         return id
 
-    def read_json(path):
+    def read_json(self, path):
         with open(path) as data_file:
             return json.load(data_file)
+
+    def get_storage_path(self):
+        return os.path.abspath(os.path.join(sys.argv[0],
+                                            os.pardir,
+                                            os.pardir,
+                                            'index'))
