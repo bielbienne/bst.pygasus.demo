@@ -5,28 +5,27 @@ version = '1.0'
 long_description = (
     open('README.rst').read()
     + '\n' +
-    'Contributors\n'
-    '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.txt').read()
-    + '\n' +
-    open('CHANGES.txt').read()
+    open('CHANGES.rst').read()
     + '\n')
 
 setup(name='bst.pygasus.demo',
       version=version,
-      description="Demo package",
+      description="Demo web application build with bst.pygausus framework",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
-        ],
-      keywords='',
+          'Programming Language :: Python :: 3',
+          'Natural Language :: English',
+          'License :: OSI Approved :: Zope Public License',
+          'Operating System :: OS Independent',
+          'Development Status :: 4 - Beta'
+      ],
+      keywords='pygasus web framework extjs',
       author='Steve Aschwanden',
       author_email='steve.aschwanden@biel-bienne.ch',
-      url='',
-      license='gpl',
+      url='https://github.com/bielbienne/bst.pygasus.demo',
+      license='ZPL 2.1',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
       namespace_packages=['bst', 'bst.pygasus'],
