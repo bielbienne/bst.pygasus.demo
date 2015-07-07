@@ -38,6 +38,8 @@ setup(name='bst.pygasus.demo',
           'Whoosh',
           'Unidecode'
       ],
+      extras_require=dict(test=['splinter']),
+      test_suite='bst.pygasus.demo.tests.test_suite',
       entry_points={
           'fanstatic.libraries': ['demo = bst.pygasus.demo.extjs:library'],
       }

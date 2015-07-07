@@ -1,0 +1,12 @@
+language: python
+python:
+    - 3.3
+    - 3.4
+install:
+    - python bootstrap.py
+    - bin/buildout
+    - bin/serve > temp & inotifywait temp
+script:
+    - bin/test
+notifications:
+    email: false
