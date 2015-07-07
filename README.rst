@@ -7,20 +7,21 @@
 Introduction
 ============
 
-This is a part of the `Pygasus framework <https://github.com/bielbienne/bst.pygasus.core>`_ as persistent
-layer to develop application with ExtJs.
+This is a demonstration application and part of the 
+`Pygasus framework <https://github.com/bielbienne/bst.pygasus.core>`_, 
+a python persistance layer and provider of generic functionality 
+for ExtJs based (web) applications.
 
-This package demonstrate as sample application how the frameworks works. You can easy install this
-application through a buildout as you can see at the bottom.
+This package demonstrates how the framework can be used and will be extended in the future.
+You can easily install it with buildout, as you can see in the installation instructions below.
 
-
-bst.pygasus and all corresponding submodules is licensed under the ZPL 2.1, see LICENSE.txt for details.
+bst.pygasus and all corresponding submodules are licensed under the ZPL 2.1, see LICENSE.txt for details.
 
 
 Installation
 ============
 
-Run you buildout:
+Run bootstrap and buildout:
 
 .. code:: bash
 
