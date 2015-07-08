@@ -12,7 +12,7 @@ before_install:
 install:
     - python bootstrap.py
     - bin/buildout
-    - unbuffer ./bin/serve | tee temp & inotifywait -e modify temp && echo "server is running"
+    - unbuffer ./bin/serve | tee temp & sleep 3 &&  inotifywait -e modify temp && echo "server is running"
 script:
     - bin/test
 notifications:
