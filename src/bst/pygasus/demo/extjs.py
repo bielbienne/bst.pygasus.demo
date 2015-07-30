@@ -8,8 +8,7 @@ from fanstatic import Resource
 
 library = Library('demo', 'app')
 styles = Resource(library, 'resources/css/styles.css')
-clearButtonStyle = Resource(library, 'resources/css/ClearButton.css')
-favicon = Resource(library, 'resources/images/phone.ico')
+favicon = Resource(library, 'resources/images/biel.ico')
 
 
 class DemoContext(ext.ApplicationContext):
@@ -21,7 +20,6 @@ class DemoContext(ext.ApplicationContext):
                          depends=[ext.extjs_resources_skinless,
                                   themes['neptune'],
                                   styles,
-                                  clearButtonStyle,
                                   favicon])
 
 
