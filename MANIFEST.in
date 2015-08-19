@@ -1,4 +1,8 @@
+include *.py
 include *.txt *.rst
 include tox.ini
 include .travis.yml
-recursive-include src/bst.pygasus.demo *.xml *.txt *.py
+include *.cfg
+recursive-include src *.xml *.txt *.py *.zcml *.js *.css *.po *.pot *.json *.ico
+recursive-include etc *.in
+exclude .*.cfg
