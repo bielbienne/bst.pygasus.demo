@@ -34,9 +34,3 @@ Start the application:
 
     $ ./bin/serve
     serving on http://0.0.0.0:8080
-
-
-About us
-========
-We are the IT Services of Biel/Bienne, Switzerland.
-http://foss.biel-bienne.ch/blog/
