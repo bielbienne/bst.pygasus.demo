@@ -1,5 +1,5 @@
-.. image:: https://travis-ci.org/bielbienne/bst.pygasus.demo.svg?branch=master
-    :target: https://travis-ci.org/bielbienne/bst.pygasus.demo
+.. image:: https://travis-ci.org/codeix/bst.pygasus.demo.svg?branch=master
+    :target: https://travis-ci.org/codeix/bst.pygasus.demo
 
 
 .. contents::
@@ -8,7 +8,7 @@ Introduction
 ============
 
 This is a demonstration application and part of the 
-`Pygasus framework <https://github.com/bielbienne/bst.pygasus.core>`_, 
+`Pygasus framework <https://github.com/codeix/bst.pygasus.core>`_, 
 a python persistance layer and provider of generic functionality 
 for ExtJs based (web) applications.
 
